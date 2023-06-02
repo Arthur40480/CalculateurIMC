@@ -1,3 +1,4 @@
+// Données IMC
 const BMIData = [
   { name: "Maigreur", color: "midnightblue", range: [0, 18.5] },
   { name: "Bonne santé", color: "green", range: [18.5, 25] },
@@ -7,4 +8,35 @@ const BMIData = [
   { name: "Obésité morbide", color: "purple", range: 40 },
 ];
 
-// IMC = poids en kg / taille² en m
+// Element du DOM
+const inputWeightElt = document.getElementById("input_weight");
+const inputSizeElt = document.getElementById("input_size");
+const buttonImcElt = document.getElementsByClassName("imc_button")[0];
+const resultImcElt = document.getElementsByClassName("imc_result");
+const conclusionImcElt = document.getElementsByClassName("imc_conclusion");
+
+//Fonction de conversion des cm en m
+function conversionMeters(a) {
+  let meters = a / 100
+  return meters
+};
+
+//Fonction pour calculer un IMC = poids en kg / taille² en m
+function calculatesImc(poids ,taille) {
+  const imc = poids / (taille * taille)
+  return imc.toFixed(1)
+};
+
+//Fonction qui récupère les valeurs de nos input et qui apelle conversionMeters() & calculatesIMC
+function getValues() {
+  const weightValue = inputWeightElt.value;
+  const sizeValueInCm = inputSizeElt.value;
+
+  const sizeValueInMeters = conversionMeters(sizeValueInCm);
+
+  console.log(calculatesImc(weightValue, sizeValueInMeters))
+}
+
+buttonImcElt.addEventListener("click", function() {
+  getValues()
+});
