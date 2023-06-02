@@ -32,6 +32,32 @@ function verif(imc) {
   };
 };
 
+//Fonction permettant d'afficher les message d'erreurs de validation
+function displayErrors(message) {
+  resultImcElt[0].textContent = "Woops !"
+  conclusionImcElt[0].textContent = message
+}
+
+//Fonction permettant de gérer les erreurs de validation
+function validationErrors(valueWeight, valueSize) {
+  const regexImc = /^[0-9]+$/;
+  const messageErrorField = "Champs invalide";
+
+  if(Number(valueWeight) === 0 || valueWeight === null || Number(valueSize) === 0 || valueSize === null) {
+    displayErrors(messageErrorField);
+    return false
+  }
+
+  else if(!regexImc.test(valueWeight) || !regexImc.test(valueSize)) {
+    displayErrors(messageErrorField);
+    return false
+  }
+
+  else {
+    return true
+  }
+};
+
 //Fonction de conversion des cm en m
 function conversionMeters(size) {
   let meters = size / 100;
@@ -48,6 +74,10 @@ function calculatesImc(poids ,taille) {
 function getValues() {
   const weightValue = inputWeightElt.value;
   const sizeValueInCm = inputSizeElt.value;
+
+  if(!validationErrors(weightValue, sizeValueInCm)) {
+    return;
+  };
 
   const sizeValueInMeters = conversionMeters(sizeValueInCm);
 
