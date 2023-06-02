@@ -15,16 +15,33 @@ const buttonImcElt = document.getElementsByClassName("imc_button")[0];
 const resultImcElt = document.getElementsByClassName("imc_result");
 const conclusionImcElt = document.getElementsByClassName("imc_conclusion");
 
+//Fonction qui compare l'IMC reçu au données de BMIData
+function verif(imc) {
+  for(let i = 0; i < BMIData.length; i++) {
+    if(imc >= BMIData[5]["range"]) {
+      resultImcElt[0].style.setProperty("color", `${BMIData[5]["color"]}`);
+      resultImcElt[0].textContent = imc;
+      conclusionImcElt[0].textContent = `Résultat : ${BMIData[5]["name"]}`;
+    }
+    else if(imc >= BMIData[i]["range"][0] && imc < BMIData[i]["range"][1]) {
+      resultImcElt[0].style.setProperty("color", `${BMIData[i]["color"]}`);
+      resultImcElt[0].textContent = imc;
+      conclusionImcElt[0].textContent = `Résultat : ${BMIData[i]["name"]}`;
+      break;
+    };
+  };
+};
+
 //Fonction de conversion des cm en m
-function conversionMeters(a) {
-  let meters = a / 100
-  return meters
+function conversionMeters(size) {
+  let meters = size / 100;
+  return meters;
 };
 
 //Fonction pour calculer un IMC = poids en kg / taille² en m
 function calculatesImc(poids ,taille) {
-  const imc = poids / (taille * taille)
-  return imc.toFixed(1)
+  const imc = poids / (taille * taille);
+  verif(imc.toFixed(1))
 };
 
 //Fonction qui récupère les valeurs de nos input et qui apelle conversionMeters() & calculatesIMC
@@ -34,9 +51,13 @@ function getValues() {
 
   const sizeValueInMeters = conversionMeters(sizeValueInCm);
 
-  console.log(calculatesImc(weightValue, sizeValueInMeters))
+  console.log(calculatesImc(weightValue, sizeValueInMeters));
 }
 
 buttonImcElt.addEventListener("click", function() {
-  getValues()
+  getValues();
 });
+
+
+
+
