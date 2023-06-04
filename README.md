@@ -6,6 +6,6 @@ L'IMC est une mesure qui évalue le poids corporel par rapport à la taille. C'e
 
 ## Fonctionnalités
 
-Calcul de l'IMC en fonction du poids et de la taille fournis par l'utilisateur.
-Affichage de la catégorie de poids correspondante (sous-poids, poids santé, surpoids, obésité, etc.).
+Calcul de l'IMC en fonction du poids et de la taille fournis par l'utilisateur.  
+Affichage de la catégorie de poids correspondante (sous-poids, poids santé, surpoids, obésité, etc.).  
 Interface utilisateur conviviale et réactive.
